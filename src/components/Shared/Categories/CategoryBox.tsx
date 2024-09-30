@@ -17,7 +17,7 @@ const CategoryBox = ({ label, Icon }:TCategoryBoxProps) => {
   border-b-2
   hover:text-neutral-800
   transition
-  cursor-pointer`}
+  cursor-pointer `}
     >
       <Icon size={26} />
       <div className='text-sm font-medium'>{label}</div>

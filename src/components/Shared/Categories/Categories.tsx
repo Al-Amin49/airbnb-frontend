@@ -1,20 +1,26 @@
-import Container from "@/components/Container/Container"
-import { categories } from "./CategoriesData"
-import CategoryBox from "./CategoryBox"
-
+import Container from "@/components/Container/Container";
+import { categories } from "./CategoriesData";
+import CategoryBox from "./CategoryBox";
 
 const Categories = () => {
   return (
-
+   <div 
+   style={{
+    boxShadow: "0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06)",
+  }}
+   >
      <Container>
-       <div className='pt-4 flex items-center justify-between overflow-x-auto'>
-        {categories.map(item => (
+      <div
+        className="pt-10 flex items-center justify-between overflow-x-auto "
+       
+      >
+        {categories.map((item) => (
           <CategoryBox key={item.label} label={item.label} Icon={item.icon} />
         ))}
       </div>
-     </Container>
-   
-  )
-}
+    </Container>
+   </div>
+  );
+};
 
-export default Categories
+export default Categories;

@@ -1,4 +1,4 @@
-import Categories from "@/components/Shared/Categories/Categories";
+import Categories from "@/components/Categories/Categories";
 
 
 export default function Home() {

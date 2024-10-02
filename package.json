@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "nexios-http": "^1.1.21",
     "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18",

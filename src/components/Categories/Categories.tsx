@@ -1,6 +1,7 @@
 import Container from "@/components/Container/Container";
 import { categories } from "./CategoriesData";
 import CategoryBox from "./CategoryBox";
+import Filters from "../Filters/Filters";
 
 const Categories = () => {
   return (
@@ -15,8 +16,9 @@ const Categories = () => {
        
       >
         {categories.map((item) => (
-          <CategoryBox key={item.label} label={item.label} Icon={item.icon} />
+          <CategoryBox key={item.label} label={item.label} img={item.img} />
         ))}
+        <Filters/>
       </div>
     </Container>
    </div>

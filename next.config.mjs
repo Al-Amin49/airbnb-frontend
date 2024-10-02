@@ -5,7 +5,15 @@ const nextConfig = {
             {
                 protocol:'https',
                 hostname:'cdn-icons-png.flaticon.com'
-            }
+            },
+            {
+                protocol:'https',
+                hostname:'i.ibb.co'
+            },
+            {
+                protocol:'https',
+                hostname:'example.com'
+            },
         ]
     }
 };

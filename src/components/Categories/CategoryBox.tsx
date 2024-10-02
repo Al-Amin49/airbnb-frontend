@@ -1,13 +1,14 @@
-import { IconType } from "react-icons"
+import Image, { StaticImageData } from "next/image";
 
+type TCategoryBoxProps = {
+  label: string;
+  img:StaticImageData ;
 
-type TCategoryBoxProps={
-    label:string,
-    Icon:IconType
-}
-const CategoryBox = ({ label, Icon }:TCategoryBoxProps) => {
+};
+const CategoryBox = ({ label, img }: TCategoryBoxProps) => {
   return (
     <div
+
       className={`flex 
   flex-col 
   items-center 
@@ -19,12 +20,10 @@ const CategoryBox = ({ label, Icon }:TCategoryBoxProps) => {
   transition
   cursor-pointer `}
     >
-      <Icon size={26} />
-      <div className='text-sm font-medium'>{label}</div>
+      <Image src={img} alt={label} width={26} height={26} />
+      <div className="text-sm font-medium">{label}</div>
     </div>
-  )
-}
+  );
+};
 
-
-
-export default CategoryBox
+export default CategoryBox;

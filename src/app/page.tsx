@@ -1,4 +1,5 @@
-import Cards from "@/components/Cards/Cards";
+
+// import Cards from "@/components/Cards/Cards";
 import Categories from "@/components/Categories/Categories";
 
 
@@ -8,7 +9,7 @@ export default function Home() {
   
   {/* categories */}
     <Categories/>
-    <Cards/>
+    {/* <Cards category={""}/> */}
   </div>
   );
 }

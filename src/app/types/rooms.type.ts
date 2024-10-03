@@ -3,8 +3,8 @@ export type TRooms = {
     location: string;
     category: string;
     title: string;
-    from: Date;
-    to: Date;
+    from: string;
+    to: string;
     pricePerNight: number;
     totalPrice: number;
     guests: number;

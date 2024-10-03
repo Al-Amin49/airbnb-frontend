@@ -10,8 +10,10 @@ const Navbar = () => {
         <div className="p-4 ">
          <nav className="md:flex justify-between items-center hidden ">
             <div className="flex items-center ">
-                 <Image src=" https://cdn-icons-png.flaticon.com/512/2111/2111320.png" alt="" width={32} height={32} />
-                <span className="text-red-500 font-bold ml-2 text-2xl">airbnb</span>
+              <Link href="/" className="flex items-center">
+              <Image src=" https://cdn-icons-png.flaticon.com/512/2111/2111320.png" alt="" width={32} height={32} />
+              <span className="text-red-500 font-bold ml-2 text-2xl">airbnb</span>
+              </Link>
             </div>
             <ul>
                 <li><Link href="/"

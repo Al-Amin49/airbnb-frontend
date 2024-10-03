@@ -1,44 +1,72 @@
-"use client"
+"use client";
 import { TRooms } from '@/app/types/rooms.type';
 import Image from 'next/image';
-import React, { useState } from 'react';
-import { FaHeart } from 'react-icons/fa';  // Heart icon from react-icons
+import React from 'react';
+import { FaHeart } from 'react-icons/fa';  
+import { FaStar } from 'react-icons/fa6';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'; 
+import Slider from 'react-slick';  
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { FiHeart } from 'react-icons/fi';
 
 export type TCardProps = {
     room: TRooms;
 };
 
-const Card = ({ room }: TCardProps) => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const totalImages = room.image.length;
+// Custom Previous Button
+const PreviousBtn = ({ onClick }: any) => (
+    <button
+        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white text-black rounded-full p-2 z-10"
+        onClick={onClick}
+    >
+        <IoIosArrowBack size={20} />
+    </button>
+);
 
+// Custom Next Button
+const NextBtn = ({ onClick }: any) => (
+    <button
+        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white  text-black rounded-full p-2 z-10"
+        onClick={onClick}
+    >
+        <IoIosArrowForward size={20} />
+    </button>
+);
+
+const Card = ({ room }: TCardProps) => {
     const isGuestFavorite = room.ratings >= 4.9;
 
-    // Function to go to the next image
-    const nextImage = () => {
-        setCurrentImageIndex((prevIndex) =>
-            prevIndex === totalImages - 1 ? 0 : prevIndex + 1
-        );
-    };
-
-    // Function to go to the previous image
-    const prevImage = () => {
-        setCurrentImageIndex((prevIndex) =>
-            prevIndex === 0 ? totalImages - 1 : prevIndex - 1
-        );
+    // Slick Slider settings
+    const settings = {
+        dots: true,
+        fade: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        prevArrow: <PreviousBtn />, 
+        nextArrow: <NextBtn />,    
+  
+        
     };
 
     return (
-        <div className=" rounded-lg border max-w-md"> {/* Card container */}
-            <div className="relative"> {/* Image slider container */}
-                {/* Image */}
-                <Image
-                    src={room?.image[currentImageIndex] || "https://a0.muscache.com/im/pictures/miso/Hosting-5264493/original/10d2c21f-84c2-46c5-b20b-b51d1c2c971a.jpeg?im_w=720"} 
-                    alt={room.title}
-                    className="rounded-lg object-cover" 
-                    width={720} 
-                    height={480} 
-                />
+        <div className="rounded-lg border max-w-md">
+            <div className="relative">
+                <Slider {...settings}>
+                    {room.image.map((imgSrc, index) => (
+                        <div key={index}>
+                            <Image
+                                src={imgSrc} 
+                                alt={room.title}
+                                className="rounded-lg object-cover" 
+                                width={720} 
+                                height={480} 
+                            />
+                        </div>
+                    ))}
+                </Slider>
 
                 {/* Overlay for Guest Favourite and Heart Icon */}
                 <div className="absolute top-0 left-0 right-0 p-3 flex justify-between items-center">
@@ -50,33 +78,18 @@ const Card = ({ room }: TCardProps) => {
                     )}
 
                     {/* Heart Icon */}
-                    <FaHeart className="text-white cursor-pointer" />
+                    <FiHeart  className="text-white cursor-pointer" />
                 </div>
-
-                {/* Previous button */}
-                <button
-                    onClick={prevImage}
-                    className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2"
-                >
-                    ‹
-                </button>
-                
-                {/* Next button */}
-                <button
-                    onClick={nextImage}
-                    className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2"
-                >
-                    ›
-                </button>
             </div>
 
             {/* Room details */}
             <div className="mt-4 p-4">
-                <h2 className="text-xl font-semibold">{room.title}</h2>
+                <div className='flex justify-between'>
+                    <h2 className="text-xl font-semibold">{room.title}</h2>
+                    <p className='flex items-center space-x-1'> <FaStar /> {room.ratings}</p>
+                </div>
                 <p className="text-gray-600">{room.location}</p>
-                <p>{room.from} to {room.to}</p>
-                <p className="font-bold">Price: ${room.pricePerNight} / night</p>
-                <p>Rating: {room.ratings} / 5</p>
+                <p className="font-bold">${room.pricePerNight} <span className='font-normal'>night</span></p>
             </div>
         </div>
     );

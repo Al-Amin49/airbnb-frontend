@@ -23,7 +23,8 @@ const CategoryBox = ({ label, img }: TCategoryBoxProps) => {
     });
     router.push(url);
   };
-
+  const isSelected = category === label;
+  console.log('isSelected', isSelected)
   return (
     <div
       onClick={handleClick}
@@ -33,10 +34,11 @@ const CategoryBox = ({ label, img }: TCategoryBoxProps) => {
         justify-center 
         gap-2
         p-3
-        border-b-2
         hover:text-neutral-800
         transition
-        cursor-pointer `}
+        cursor-pointer 
+        ${isSelected? 'border-b-2 border-neutral-800' : ''}  
+        `}
     >
       <Image src={img} alt={label} width={26} height={26} />
       <div className="text-sm font-medium">{label}</div>

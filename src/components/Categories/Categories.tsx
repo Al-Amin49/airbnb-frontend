@@ -7,31 +7,33 @@ import Filters from "../Filters/Filters";
 import { useSearchParams } from "next/navigation"; 
 import { TRooms } from "@/app/types/rooms.type";
 import Card from "../Cards/Card";
-
+import CardSkeleton from "../Cards/CardSkeleton";
 
 
 const Categories = () => {
-  const [rooms, setRooms] = useState<TRooms[]>([]); // Store the rooms data
+  const [rooms, setRooms] = useState<TRooms[]>([]); 
+  const [loading, setLoading] = useState(true);  
   const searchParams = useSearchParams();
-  const category = searchParams.get("category"); 
-  console.log('category', category)
+  const category = searchParams.get("category");
 
   // Fetch rooms based on selected category
   const fetchRooms = async (category: string | null) => {
+    setLoading(true);  
     try {
       const res = await fetch(`http://localhost:5000/api/v1/rooms${category ? `?category=${category}` : ""}`);
       const data = await res.json();
-      console.log('data', data)
-      setRooms(data.data); 
+      setRooms(data.data);
     } catch (error) {
       console.error("Failed to fetch rooms:", error);
+    } finally {
+      setLoading(false);  
     }
   };
 
   // Fetch rooms when the component mounts or the category changes
   useEffect(() => {
     fetchRooms(category);
-  }, [category]); 
+  }, [category]);
 
   return (
     <div
@@ -48,12 +50,13 @@ const Categories = () => {
           <Filters />
         </div>
 
-        {/* Display fetched rooms */}
+        {/* Display fetched rooms or show skeleton while loading */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rooms.length > 0 ? (
-            rooms.map((room) => (
-             <Card key={room._id} room={room}></Card>
-            ))
+          {loading ? (
+            // Show skeleton placeholders when loading
+            [...Array(6)].map((_, index) => <CardSkeleton key={index} />)
+          ) : rooms.length > 0 ? (
+            rooms.map((room) => <Card key={room._id} room={room} />)
           ) : (
             <p>No rooms available for this category.</p>
           )}

@@ -56,15 +56,15 @@ const Card = ({ room }: TCardProps) => {
             <div className="relative">
                 <Slider {...settings}>
                     {room.image.map((imgSrc, index) => (
-                        <div key={index}>
-                            <Image
-                                src={imgSrc} 
-                                alt={room.title}
-                                className="rounded-lg object-cover" 
-                                width={720} 
-                                height={480} 
-                            />
-                        </div>
+                         <div key={index}>
+                         <Image
+                             src={imgSrc} 
+                             alt={room.title}
+                             className="rounded-lg object-cover w-full h-[300px]" 
+                             width={720} 
+                             height={300}  // Fixed height
+                         />
+                     </div>
                     ))}
                 </Slider>
 

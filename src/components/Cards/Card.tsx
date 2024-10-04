@@ -2,7 +2,6 @@
 import { TRooms } from '@/app/types/rooms.type';
 import Image from 'next/image';
 import React from 'react';
-import { FaHeart } from 'react-icons/fa';  
 import { FaStar } from 'react-icons/fa6';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'; 
 import Slider from 'react-slick';  
